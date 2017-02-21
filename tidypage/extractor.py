@@ -4,10 +4,10 @@ from bs4 import BeautifulSoup
 import logging
 import sys
 import re
-from cleaners import clean_tag
-from cleaners import clean_spam
+from .cleaners import clean_tag
+from .cleaners import clean_spam
 import urllib2, cookielib, StringIO, gzip
-log = logging.getLogger("common-extractor.extractor")
+log = logging.getLogger("tidypage.extractor")
 
 TEXT_TAG_COLLECTION = {"p":5, "span":4, "font":3, "i":2, "b":1, "pre": 1}
 
