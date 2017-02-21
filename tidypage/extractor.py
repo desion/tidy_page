@@ -329,22 +329,14 @@ def main():
     html_fp = None
     if options.url:
         headers = {'User-Agent': 'Mozilla/5.0'}
-        if sys.version_info[0] == 3:
-            import urllib.request, urllib.parse, urllib.error, http.cookiejar
-            from io import StringIO
-            request = urllib.request.Request(options.url, None, headers)
-        else:
-            import urllib2, cookielib, StringIO
-            request = urllib2.Request(options.url, None, headers)
+        import urllib2, cookielib, StringIO
+        request = urllib2.Request(options.url, None, headers)
     else:
         html_fp = open(args[0], 'rt')
     
     try:
         if options.url:
-            if sys.version_info[0] == 3:
-                opener = urllib.build_opener(urllib2.HTTPCookieProcessor(cookielib.CookieJar()))
-            else:
-                opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookielib.CookieJar()))
+            opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookielib.CookieJar()))
             conn = opener.open(request)
             html_str = conn.read()
             if conn.headers.get('html-Encoding') == 'gzip' or conn.headers.get('Content-Encoding') == 'gzip':
