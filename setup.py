@@ -14,7 +14,7 @@ if sys.platform == 'darwin':
 
 setup(
     name="tidy-page",
-    version="0.1.0",
+    version="0.1.1",
     author="Desion Wang",
     author_email="wdxin1322@qq.com",
     description="html text parser,get the content form html page",
