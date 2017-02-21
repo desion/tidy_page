@@ -1,6 +1,6 @@
 import os
 import unittest
-from tidypage import Document
+from extractor import Document
 
 HTMLS = os.path.join(os.path.dirname(__file__), 'htmls')
 
