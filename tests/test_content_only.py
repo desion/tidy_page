@@ -8,6 +8,6 @@ class TestContentOnly(unittest.TestCase):
     def test_content_parser(self):
         html = open(os.path.join(HTMLS, "aleyna-tilki-basrol-oynamaya-hazirlaniyor.html")).read()
         doc = Document(html, True, "http://www.test.com/test.html")
-        print doc.content()
+        doc.content()
 
 

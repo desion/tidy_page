@@ -58,7 +58,6 @@ class Document:
         candidates = self.get_candidates()
         best_node = self.best_candidates(candidates)
         if best_node:
-            #print "BEST_NODE:%s" %((best_node["elem"]))
             return self.purify(best_node["elem"])
         else:
             return None
@@ -129,7 +128,6 @@ class Document:
                 tmp = i
             cur_text_len += block_set[i]
             i += 1
-        print "MAX_BLK_LEN:%d START:%d END:%d" %(max_text_len, start, end)
         
     
     def text_weight(self, elem):
@@ -187,7 +185,6 @@ class Document:
                     if REGEXES['positiveRe'].search(feature):
                         weight += 25
             except:
-                #print feature
                 continue
         return weight
 
@@ -305,7 +302,6 @@ class Document:
                     continue
             except StopIteration:
                 break
-        #print best_elem.prettify("utf-8")
         return best_elem.prettify("utf-8")
 
 
@@ -355,12 +351,7 @@ def main():
             html_str = html_fp.read()
         doc = Document(html_str, options.foreign, url=options.url)
         doc.walk()
-        print doc.get_link_tag_density(doc.get_dom())
-        if doc.is_index_page():
-            print "this is a index page"
-        else:
-            print "this is a detail page"
-        print doc.content()
+        doc.content()
     finally:
         if html_fp:
             html_fp.close()
