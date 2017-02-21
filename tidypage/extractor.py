@@ -5,7 +5,7 @@ import sys
 import re
 from .cleaners import clean_tag
 from .cleaners import clean_spam
-import StringIO, gzip
+import gzip
 log = logging.getLogger("tidypage.extractor")
 
 TEXT_TAG_COLLECTION = {"p":5, "span":4, "font":3, "i":2, "b":1, "pre": 1}
@@ -331,9 +331,10 @@ def main():
         headers = {'User-Agent': 'Mozilla/5.0'}
         if sys.version_info[0] == 3:
             import urllib.request, urllib.parse, urllib.error, http.cookiejar
+            from io import StringIO
             request = urllib.request.Request(options.url, None, headers)
         else:
-            import urllib2, cookielib
+            import urllib2, cookielib, StringIO
             request = urllib2.Request(options.url, None, headers)
     else:
         html_fp = open(args[0], 'rt')
