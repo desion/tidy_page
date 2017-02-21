@@ -1,4 +1,3 @@
-#!/usr/bin/python
 #-*- coding: UTF-8 -*-
 from bs4 import BeautifulSoup
 import logging
@@ -6,7 +5,7 @@ import sys
 import re
 from .cleaners import clean_tag
 from .cleaners import clean_spam
-import cookielib, StringIO, gzip
+import StringIO, gzip
 log = logging.getLogger("tidypage.extractor")
 
 TEXT_TAG_COLLECTION = {"p":5, "span":4, "font":3, "i":2, "b":1, "pre": 1}
@@ -331,10 +330,10 @@ def main():
     if options.url:
         headers = {'User-Agent': 'Mozilla/5.0'}
         if sys.version_info[0] == 3:
-            import urllib.request, urllib.parse, urllib.error
+            import urllib.request, urllib.parse, urllib.error, http.cookiejar
             request = urllib.request.Request(options.url, None, headers)
         else:
-            import urllib2
+            import urllib2, cookielib
             request = urllib2.Request(options.url, None, headers)
     else:
         html_fp = open(args[0], 'rt')
