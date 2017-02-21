@@ -6,7 +6,7 @@ import sys
 import re
 from .cleaners import clean_tag
 from .cleaners import clean_spam
-import urllib2, cookielib, StringIO, gzip
+import cookielib, StringIO, gzip
 log = logging.getLogger("tidypage.extractor")
 
 TEXT_TAG_COLLECTION = {"p":5, "span":4, "font":3, "i":2, "b":1, "pre": 1}
@@ -334,13 +334,17 @@ def main():
             import urllib.request, urllib.parse, urllib.error
             request = urllib.request.Request(options.url, None, headers)
         else:
+            import urllib2
             request = urllib2.Request(options.url, None, headers)
     else:
         html_fp = open(args[0], 'rt')
     
     try:
         if options.url:
-            opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookielib.CookieJar()))
+            if sys.version_info[0] == 3:
+                opener = urllib.build_opener(urllib2.HTTPCookieProcessor(cookielib.CookieJar()))
+            else:
+                opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookielib.CookieJar()))
             conn = opener.open(request)
             html_str = conn.read()
             if conn.headers.get('html-Encoding') == 'gzip' or conn.headers.get('Content-Encoding') == 'gzip':
